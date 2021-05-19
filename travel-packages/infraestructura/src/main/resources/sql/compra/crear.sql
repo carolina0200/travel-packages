@@ -1,0 +1,2 @@
+insert into compra (id_paquete, valor, numero_menores, numero_adultos, vigencia, identificacion, nombre, correo, fecha_compra, fecha_ida, fecha_regreso)
+values (:idPaquete, :valor, :numeroMenores, :numeroAdultos, :vigencia, :identificacion, :nombre, :correo, :fechaCompra, :fechaIda, :fechaRegreso)
