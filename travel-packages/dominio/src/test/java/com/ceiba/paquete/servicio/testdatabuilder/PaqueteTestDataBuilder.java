@@ -1,9 +1,11 @@
 package com.ceiba.paquete.servicio.testdatabuilder;
 
+import com.ceiba.compra.servicio.testdatabuilder.CompraTestDataBuilder;
 import com.ceiba.paquete.modelo.dto.DtoPaquete;
 import com.ceiba.paquete.modelo.entidad.Paquete;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 
 public class PaqueteTestDataBuilder {
     private Long id;
@@ -27,6 +29,21 @@ public class PaqueteTestDataBuilder {
         this.dias = 4L;
         this.fechaCreacion = LocalDateTime.now();
         this.fechaHasta = this.fechaCreacion.plusDays(30);
+    }
+
+    public PaqueteTestDataBuilder conFechaIdaSemana() {
+        this.fechaHasta = LocalDateTime.of(2021, Month.MAY, 18, 15, 00);
+        return this;
+    }
+
+    public PaqueteTestDataBuilder conFechaIdaSemanaProxima() {
+        this.fechaHasta = LocalDateTime.of(2021, Month.MAY, 26, 15, 00);
+        return this;
+    }
+
+    public PaqueteTestDataBuilder conCupos(Long cupos) {
+        this.cupos = cupos;
+        return this;
     }
 
     public Paquete build() {
