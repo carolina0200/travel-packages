@@ -30,17 +30,6 @@ public class Paquete {
     private LocalDateTime fechaHasta;
 
     public Paquete(Long id, Double precio, String estado, String ciudad, String hotel, String descripcion, Long cupos, Long dias, LocalDateTime fechaCreacion, LocalDateTime fechaHasta) {
-
-        validarObligatorio(precio, MENSAJE_PRECIO_OBLIGATORIO);
-        validarPositivo(precio, MENSAJE_PRECIO_POSITIVO);
-        validarObligatorio(estado, MENSAJE_ESTADO_OBLIGATORIO);
-        validarObligatorio(ciudad, MENSAJE_CUIDAD_OBLIGATORIO);
-        validarObligatorio(cupos, MENSAJE_CUPOS_OBLIGATORIO);
-        validarObligatorio(dias, MENSAJE_DIAS_OBLIGATORIO);
-        validarObligatorio(fechaCreacion, MENSAJE_FECHA_CREACION_OBLIGATORIO);
-        validarObligatorio(fechaHasta, MENSAJE_FECHA_HASTA_OBLIGATORIO);
-        validarMenor(LocalDateTime.now(), fechaHasta, MENSAJE_FECHA_HASTA_VALIDACION);
-
         this.id = id;
         this.precio = precio;
         this.estado = estado;
@@ -51,5 +40,19 @@ public class Paquete {
         this.dias = dias;
         this.fechaCreacion = fechaCreacion;
         this.fechaHasta = fechaHasta;
+
+        validacionCampos();
+    }
+
+    private void validacionCampos() {
+        validarObligatorio(precio, MENSAJE_PRECIO_OBLIGATORIO);
+        validarPositivo(precio, MENSAJE_PRECIO_POSITIVO);
+        validarObligatorio(estado, MENSAJE_ESTADO_OBLIGATORIO);
+        validarObligatorio(ciudad, MENSAJE_CUIDAD_OBLIGATORIO);
+        validarObligatorio(cupos, MENSAJE_CUPOS_OBLIGATORIO);
+        validarObligatorio(dias, MENSAJE_DIAS_OBLIGATORIO);
+        validarObligatorio(fechaCreacion, MENSAJE_FECHA_CREACION_OBLIGATORIO);
+        validarObligatorio(fechaHasta, MENSAJE_FECHA_HASTA_OBLIGATORIO);
+        validarMenor(LocalDateTime.now(), fechaHasta, MENSAJE_FECHA_HASTA_VALIDACION);
     }
 }

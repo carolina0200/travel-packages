@@ -45,7 +45,22 @@ public class Compra {
     private LocalDateTime fechaRegreso;
 
     public Compra(Long id, Long idPaquete, Double valor, String vigencia, String nombre, String correo, Long numeroMenores, Long numeroAdultos, LocalDateTime fechaCompra, LocalDateTime fechaIda, LocalDateTime fechaRegreso) {
+        this.id = id;
+        this.idPaquete = idPaquete;
+        this.valor = valor;
+        this.vigencia = vigencia;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.numeroMenores = numeroMenores;
+        this.numeroAdultos = numeroAdultos;
+        this.fechaCompra = fechaCompra;
+        this.fechaIda = fechaIda;
+        this.fechaRegreso = fechaRegreso;
 
+        validacionCampos();
+    }
+
+    private void validacionCampos() {
         validarObligatorio(idPaquete, MENSAJE_ID_PAQUETE_OBLIGATORIO);
         validarObligatorio(valor, MENSAJE_VALOR_OBLIGATORIO);
         validarPositivo(valor, MENSAJE_VALOR_POSITIVO);
@@ -62,17 +77,5 @@ public class Compra {
         validarObligatorio(fechaIda, MENSAJE_FECHA_IDA_OBLIGATORIO);
         validarObligatorio(fechaRegreso, MENSAJE_FECHA_REGRESO_OBLIGATORIO);
         validarMenor(fechaIda, fechaRegreso, MENSAJE_FECHAS_VALIDACION);
-
-        this.id = id;
-        this.idPaquete = idPaquete;
-        this.valor = valor;
-        this.vigencia = vigencia;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.numeroMenores = numeroMenores;
-        this.numeroAdultos = numeroAdultos;
-        this.fechaCompra = fechaCompra;
-        this.fechaIda = fechaIda;
-        this.fechaRegreso = fechaRegreso;
     }
 }

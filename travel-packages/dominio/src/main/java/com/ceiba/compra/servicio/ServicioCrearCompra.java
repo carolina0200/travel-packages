@@ -5,7 +5,6 @@ import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.paquete.modelo.dto.DtoPaquete;
-import com.ceiba.paquete.modelo.entidad.Paquete;
 import com.ceiba.paquete.puerto.dao.DaoPaquete;
 import com.ceiba.paquete.puerto.repositorio.RepositorioPaquete;
 import static com.ceiba.dominio.ValidadorArgumento.*;
