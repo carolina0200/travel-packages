@@ -14,9 +14,8 @@ import java.time.LocalDateTime;
 public class ComandoCompra {
     private Long id;
     private Long idPaquete;
-    private Long valor;
+    private Double valor;
     private String vigencia;
-    private String identificacion;
     private String nombre;
     private String correo;
     private Long numeroMenores;

@@ -1,21 +1,23 @@
 package com.ceiba.compra.servicio;
 
 import com.ceiba.BasePrueba;
-import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
-import com.ceiba.usuario.servicio.testdatabuilder.UsuarioTestDataBuilder;
+import com.ceiba.compra.modelo.entidad.Compra;
+import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
+import com.ceiba.compra.servicio.testdatabuilder.CompraTestDataBuilder;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 public class ServicioActualizarCompraTest {
 
-    /* @Test
-    public void validarUsuarioExistenciaPreviaTest() {
+    @Test
+    public void validarCompraExistenciaPreviaTest() {
         // arrange
-        Usuario usuario = new UsuarioTestDataBuilder().conId(1L).build();
-        RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
-        Mockito.when(repositorioUsuario.existeExcluyendoId(Mockito.anyLong(),Mockito.anyString())).thenReturn(true);
-        ServicioActualizarUsuario servicioActualizarUsuario = new ServicioActualizarUsuario(repositorioUsuario);
+        Compra compra = new CompraTestDataBuilder().build();
+        RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
+        Mockito.when(repositorioCompra.existe(Mockito.anyLong(), Mockito.anyLong())).thenReturn(false);
+        ServicioActualizarCompra servicioActualizarCompra = new ServicioActualizarCompra(repositorioCompra);
         // act - assert
-        BasePrueba.assertThrows(() -> servicioActualizarUsuario.ejecutar(usuario), ExcepcionDuplicidad.class,"El usuario ya existe en el sistema");
-    } */
+        BasePrueba.assertThrows(() -> servicioActualizarCompra.ejecutar(compra), ExcepcionSinDatos.class,"La compra no existe en el sistema");
+    }
 }

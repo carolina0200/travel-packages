@@ -10,4 +10,6 @@ public interface DaoPaquete {
      * @return los paquetes
      */
     List<DtoPaquete> listar();
+
+    DtoPaquete obtener(Long id);
 }

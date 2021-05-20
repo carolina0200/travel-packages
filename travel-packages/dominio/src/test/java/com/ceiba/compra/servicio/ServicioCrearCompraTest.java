@@ -1,29 +1,57 @@
 package com.ceiba.compra.servicio;
 
 import com.ceiba.BasePrueba;
+import com.ceiba.compra.modelo.entidad.Compra;
+import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
+import com.ceiba.compra.servicio.testdatabuilder.CompraTestDataBuilder;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
-import com.ceiba.dominio.excepcion.ExcepcionLongitudValor;
-import com.ceiba.usuario.servicio.testdatabuilder.UsuarioTestDataBuilder;
+import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.paquete.puerto.repositorio.RepositorioPaquete;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 public class ServicioCrearCompraTest {
-   /* @Test
-    public void validarClaveLongitudMenor4Test() {
+    @Test
+    public void validarFormatoCorreoTest() {
         // arrange
-        UsuarioTestDataBuilder usuarioTestDataBuilder = new UsuarioTestDataBuilder().conClave("124");
+        CompraTestDataBuilder compraTestDataBuilder = new CompraTestDataBuilder().conCorreo("micorreo.com");
         // act - assert
-        BasePrueba.assertThrows(() -> usuarioTestDataBuilder.build(), ExcepcionLongitudValor.class, "La clave debe tener una longitud mayor o igual a 4");
+        BasePrueba.assertThrows(() -> compraTestDataBuilder.build(), ExcepcionValorInvalido.class, "El correo debe seguir el siguiente formato (correo@servicio.com)");
     }
 
     @Test
-    public void validarUsuarioExistenciaPreviaTest() {
+    public void validarVigenciaTest() {
         // arrange
-        Usuario usuario = new UsuarioTestDataBuilder().build();
-        RepositorioUsuario repositorioUsuario = Mockito.mock(RepositorioUsuario.class);
-        Mockito.when(repositorioUsuario.existe(Mockito.anyString())).thenReturn(true);
-        ServicioCrearUsuario servicioCrearUsuario = new ServicioCrearUsuario(repositorioUsuario);
+        CompraTestDataBuilder compraTestDataBuilder = new CompraTestDataBuilder().conVigencia("F");
         // act - assert
-        BasePrueba.assertThrows(() -> servicioCrearUsuario.ejecutar(usuario), ExcepcionDuplicidad.class,"El usuario ya existe en el sistema");
-    }*/
+        BasePrueba.assertThrows(() -> compraTestDataBuilder.build(), ExcepcionValorInvalido.class, "En vigencia va A para Activa e I para Inactiva");
+    }
+
+    @Test
+    public void validarExistenciaPaqueteTest() {
+        // arrange
+        Compra compra = new CompraTestDataBuilder().build();
+        RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
+        RepositorioPaquete repositorioPaquete = Mockito.mock(RepositorioPaquete.class);
+        Mockito.when(repositorioPaquete.existe(Mockito.anyLong())).thenReturn(false);
+        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, repositorioPaquete);
+        // act - assert
+        BasePrueba.assertThrows(() -> servicioCrearCompra.ejecutar(compra), ExcepcionSinDatos.class,"El paquete no existe en el sistema");
+    }
+
+    @Test
+    public void validarCompraExistenciaPreviaTest() {
+        // arrange
+        Compra compra = new CompraTestDataBuilder().build();
+        RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
+        RepositorioPaquete repositorioPaquete = Mockito.mock(RepositorioPaquete.class);
+        Mockito.when(repositorioPaquete.existe(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(repositorioCompra.existe(Mockito.anyLong(), Mockito.anyLong())).thenReturn(true);
+        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, repositorioPaquete);
+        // act - assert
+        BasePrueba.assertThrows(() -> servicioCrearCompra.ejecutar(compra), ExcepcionDuplicidad.class,"La compra ya existe en el sistema");
+    }
+
+
 }

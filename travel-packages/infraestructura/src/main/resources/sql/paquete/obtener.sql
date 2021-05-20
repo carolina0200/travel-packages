@@ -1,0 +1,1 @@
+select * from paquete where id = :id

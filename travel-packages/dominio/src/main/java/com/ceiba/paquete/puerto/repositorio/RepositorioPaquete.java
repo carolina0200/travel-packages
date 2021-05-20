@@ -15,4 +15,6 @@ public interface RepositorioPaquete {
      * @param paquete
      */
     void actualizar(Paquete paquete);
+
+    boolean existe(Long id);
 }

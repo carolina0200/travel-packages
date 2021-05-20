@@ -1,29 +1,28 @@
 create table compra (
  id int(11) not null auto_increment,
  id_paquete int(11) not null,
- valor int(10),
- numero_menores int(100),
- numero_adultos int(100),
+ valor double not null,
+ numero_menores int(5),
+ numero_adultos int(5),
  vigencia varchar(1),
- identificacion varchar(11),
  nombre varchar(100),
  correo varchar(100),
- fecha_compra datetime null,
- fecha_ida datetime null,
- fecha_regreso datetime null,
+ fecha_compra datetime not null,
+ fecha_ida datetime not null,
+ fecha_regreso datetime not null,
  primary key (id)
 );
 
 create table paquete (
  id int(11) not null auto_increment,
- precio int(10) not null,
+ precio double not null,
  estado varchar(1) not null,
- ciudad varchar(100),
+ ciudad varchar(100) not null,
  hotel varchar(100),
  descripcion varchar(200),
  cupos int(10) not null,
  dias int(10) not null,
- fecha_creacion datetime null,
- fecha_hasta datetime null,
+ fecha_creacion datetime not null,
+ fecha_hasta datetime not null,
  primary key (id)
 );

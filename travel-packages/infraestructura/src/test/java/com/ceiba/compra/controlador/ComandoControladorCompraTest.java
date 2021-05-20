@@ -39,7 +39,7 @@ public class ComandoControladorCompraTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(compra)))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{'valor': 1}"));
+                .andExpect(content().json("{'valor': 2}"));
     }
 
     @Test
@@ -53,5 +53,19 @@ public class ComandoControladorCompraTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(compra)))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void calcularPrecio() throws Exception{
+        // arrange
+        Long id = 1L;
+        ComandoCompra compra = new ComandoCompraTestDataBuilder().build();
+
+        // act - assert
+        mocMvc.perform(put("/compras/calcular-precio/{id}",id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(compra)))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{'valor': 1250}"));
     }
 }

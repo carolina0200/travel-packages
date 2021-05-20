@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class DtoPaquete {
     private Long id;
-    private Long precio;
+    private Double precio;
     private String estado;
     private String ciudad;
     private String hotel;

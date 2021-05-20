@@ -4,6 +4,7 @@ import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.compra.modelo.entidad.Compra;
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,6 +18,9 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     @SqlStatement(namespace="compra", value="actualizar")
     private static String sqlActualizar;
 
+    @SqlStatement(namespace="compra", value="existe")
+    private static String sqlExiste;
+
     public RepositorioCompraMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -29,5 +33,14 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     @Override
     public void actualizar(Compra compra) {
         this.customNamedParameterJdbcTemplate.actualizar(compra, sqlActualizar);
+    }
+
+    @Override
+    public boolean existe(Long id, Long idPaquete) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        paramSource.addValue("idPaquete", idPaquete);
+
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
     }
 }

@@ -1,0 +1,1 @@
+select count(1) from paquete where id = :id

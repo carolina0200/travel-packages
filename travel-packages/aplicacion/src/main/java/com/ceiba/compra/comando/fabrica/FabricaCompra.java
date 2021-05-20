@@ -13,7 +13,6 @@ public class FabricaCompra {
                 comandoCompra.getIdPaquete(),
                 comandoCompra.getValor(),
                 comandoCompra.getVigencia(),
-                comandoCompra.getIdentificacion(),
                 comandoCompra.getNombre(),
                 comandoCompra.getCorreo(),
                 comandoCompra.getNumeroMenores(),

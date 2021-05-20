@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ComandoPaquete {
     private Long id;
-    private Long precio;
+    private Double precio;
     private String estado;
     private String ciudad;
     private String hotel;

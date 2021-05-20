@@ -1,12 +1,13 @@
 package com.ceiba.paquete.servicio.testdatabuilder;
 
+import com.ceiba.paquete.modelo.dto.DtoPaquete;
 import com.ceiba.paquete.modelo.entidad.Paquete;
 
 import java.time.LocalDateTime;
 
 public class PaqueteTestDataBuilder {
     private Long id;
-    private Long precio;
+    private Double precio;
     private String estado;
     private String ciudad;
     private String hotel;
@@ -17,7 +18,7 @@ public class PaqueteTestDataBuilder {
     private LocalDateTime fechaHasta;
 
     public PaqueteTestDataBuilder() {
-        this.precio = 1000000L;
+        this.precio = 1000000D;
         this.estado = "A";
         this.ciudad = "Cartagena";
         this.hotel = "Decameron";
@@ -30,5 +31,9 @@ public class PaqueteTestDataBuilder {
 
     public Paquete build() {
         return new Paquete(id, precio, estado, ciudad, hotel, descripcion, cupos, dias, fechaCreacion, fechaHasta);
+    }
+
+    public DtoPaquete buildDto() {
+        return new DtoPaquete(id, precio, estado, ciudad, hotel, descripcion, cupos, dias, fechaCreacion, fechaHasta);
     }
 }

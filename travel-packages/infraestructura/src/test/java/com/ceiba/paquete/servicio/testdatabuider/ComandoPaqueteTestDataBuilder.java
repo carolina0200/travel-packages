@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class ComandoPaqueteTestDataBuilder {
     private Long id;
-    private Long precio;
+    private Double precio;
     private String estado;
     private String ciudad;
     private String hotel;
@@ -18,7 +18,7 @@ public class ComandoPaqueteTestDataBuilder {
     private LocalDateTime fechaHasta;
 
     public ComandoPaqueteTestDataBuilder() {
-        this.precio = 1000000L;
+        this.precio = 1000000D;
         this.estado = "A";
         this.ciudad = "Cartagena";
         this.hotel = "Decameron";

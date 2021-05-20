@@ -12,7 +12,7 @@ public class MapeoPaquete implements RowMapper<DtoPaquete>, MapperResult {
     public DtoPaquete mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         return new DtoPaquete(
                 resultSet.getLong("id"),
-                resultSet.getLong("precio"),
+                resultSet.getDouble("precio"),
                 resultSet.getString("estado"),
                 resultSet.getString("ciudad"),
                 resultSet.getString("hotel"),

@@ -3,13 +3,13 @@ package com.ceiba.compra.servicio.testdatabuilder;
 import com.ceiba.compra.modelo.entidad.Compra;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 
 public class CompraTestDataBuilder {
     private Long id;
     private Long idPaquete;
-    private Long valor;
+    private Double valor;
     private String vigencia;
-    private String identificacion;
     private String nombre;
     private String correo;
     private Long numeroMenores;
@@ -20,9 +20,9 @@ public class CompraTestDataBuilder {
     private LocalDateTime fechaRegreso;
 
     public CompraTestDataBuilder() {
-        this.valor = 1000000L;
+        this.idPaquete = 1L;
+        this.valor = 1000000D;
         this.vigencia = "A";
-        this.identificacion = "1007238543";
         this.nombre = "Carolina Giraldo";
         this.correo = "test@gmail.com";
         this.numeroMenores = 3L;
@@ -32,8 +32,42 @@ public class CompraTestDataBuilder {
         this.fechaRegreso = this.fechaIda.plusDays(3);
     }
 
+    public CompraTestDataBuilder conCorreo(String correo) {
+        this.correo = correo;
+        return this;
+    }
+
+    public CompraTestDataBuilder conVigencia(String vigencia) {
+        this.vigencia = vigencia;
+        return this;
+    }
+
+    public CompraTestDataBuilder conNumeroMenores(Long numero) {
+        this.numeroMenores = numero;
+        return this;
+    }
+
+    public CompraTestDataBuilder conNumeroAdultos(Long numero) {
+        this.numeroAdultos = numero;
+        return this;
+    }
+
+    public CompraTestDataBuilder conFechaIdaSabado() {
+        this.fechaCompra = LocalDateTime.of(2021, Month.MAY, 20, 15, 00);
+        this.fechaIda = LocalDateTime.of(2021, Month.MAY, 22, 15, 00);
+        this.fechaRegreso = LocalDateTime.of(2021, Month.MAY, 25, 15, 00);
+        return this;
+    }
+
+    public CompraTestDataBuilder conFechaIdaSemana() {
+        this.fechaCompra = LocalDateTime.of(2021, Month.MAY, 19, 15, 00);
+        this.fechaIda = LocalDateTime.of(2021, Month.MAY, 20, 15, 00);
+        this.fechaRegreso = LocalDateTime.of(2021, Month.MAY, 23, 15, 00);
+        return this;
+    }
+
     public Compra build() {
-        return new Compra(id, idPaquete, valor, vigencia, identificacion, nombre,
+        return new Compra(id, idPaquete, valor, vigencia, nombre,
                 correo, numeroMenores, numeroAdultos, fechaCompra, fechaIda, fechaRegreso);
     }
 }

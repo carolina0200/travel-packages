@@ -2,7 +2,9 @@ package com.ceiba.configuracion;
 
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.compra.servicio.ServicioActualizarCompra;
+import com.ceiba.compra.servicio.ServicioCalcularPrecioCompra;
 import com.ceiba.compra.servicio.ServicioCrearCompra;
+import com.ceiba.paquete.puerto.dao.DaoPaquete;
 import com.ceiba.paquete.puerto.repositorio.RepositorioPaquete;
 import com.ceiba.paquete.servicio.ServicioActualizarPaquete;
 import com.ceiba.paquete.servicio.ServicioCrearPaquete;
@@ -18,8 +20,13 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioCrearCompra servicioCrearCompra(RepositorioCompra repositorioCompra) {
-        return new ServicioCrearCompra(repositorioCompra);
+    public ServicioCrearCompra servicioCrearCompra(RepositorioCompra repositorioCompra, RepositorioPaquete repositorioPaquete) {
+        return new ServicioCrearCompra(repositorioCompra, repositorioPaquete);
+    }
+
+    @Bean
+    public ServicioCalcularPrecioCompra servicioCalcularPrecioCompra(RepositorioPaquete repositorioPaquete, DaoPaquete daoPaquete) {
+        return new ServicioCalcularPrecioCompra(repositorioPaquete, daoPaquete);
     }
 
     @Bean

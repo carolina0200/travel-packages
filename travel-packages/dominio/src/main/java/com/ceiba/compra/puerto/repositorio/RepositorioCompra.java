@@ -15,4 +15,6 @@ public interface RepositorioCompra {
      * @param compra
      */
     void actualizar(Compra compra);
+
+    boolean existe(Long id, Long idPaquete);
 }

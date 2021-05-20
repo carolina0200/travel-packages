@@ -3,6 +3,7 @@ package com.ceiba.compra.controlador;
 import com.ceiba.ComandoRespuesta;
 import com.ceiba.compra.comando.ComandoCompra;
 import com.ceiba.compra.comando.manejador.ManejadorActualizarCompra;
+import com.ceiba.compra.comando.manejador.ManejadorCalcularPrecioCompra;
 import com.ceiba.compra.comando.manejador.ManejadorCrearCompra;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,10 +16,12 @@ public class ComandoControladorCompra {
 
     private final ManejadorActualizarCompra manejadorActualizarCompra;
     private final ManejadorCrearCompra manejadorCrearCompra;
+    private final ManejadorCalcularPrecioCompra manejadorCalcularPrecioCompra;
 
-    public ComandoControladorCompra(ManejadorActualizarCompra manejadorActualizarCompra, ManejadorCrearCompra manejadorCrearCompra) {
+    public ComandoControladorCompra(ManejadorActualizarCompra manejadorActualizarCompra, ManejadorCrearCompra manejadorCrearCompra, ManejadorCalcularPrecioCompra manejadorCalcularPrecioCompra) {
         this.manejadorActualizarCompra = manejadorActualizarCompra;
         this.manejadorCrearCompra = manejadorCrearCompra;
+        this.manejadorCalcularPrecioCompra = manejadorCalcularPrecioCompra;
     }
 
     @PostMapping
@@ -28,9 +31,16 @@ public class ComandoControladorCompra {
     }
 
     @PutMapping(value="/{id}")
-    @ApiOperation("Actualizar paquete")
+    @ApiOperation("Actualizar compra")
     public void actualizar(@RequestBody ComandoCompra comandoCompra, @PathVariable Long id) {
         comandoCompra.setId(id);
         manejadorActualizarCompra.ejecutar(comandoCompra);
+    }
+
+    @PutMapping(value="/calcular-precio/{id}")
+    @ApiOperation("Calcular valor compra")
+    public ComandoRespuesta<Double> calcularPrecio(@RequestBody ComandoCompra comandoCompra, @PathVariable Long id) {
+        comandoCompra.setId(id);
+        return manejadorCalcularPrecioCompra.ejecutar(comandoCompra);
     }
 }

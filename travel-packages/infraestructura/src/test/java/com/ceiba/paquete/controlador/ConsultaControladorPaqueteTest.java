@@ -33,7 +33,7 @@ public class ConsultaControladorPaqueteTest {
         mocMvc.perform(get("/paquetes")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].ciudad", is("Cartagena")));
     }
 }
