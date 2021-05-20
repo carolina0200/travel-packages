@@ -20,8 +20,8 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioCrearCompra servicioCrearCompra(RepositorioCompra repositorioCompra, RepositorioPaquete repositorioPaquete) {
-        return new ServicioCrearCompra(repositorioCompra, repositorioPaquete);
+    public ServicioCrearCompra servicioCrearCompra(RepositorioCompra repositorioCompra, RepositorioPaquete repositorioPaquete, DaoPaquete daoPaquete) {
+        return new ServicioCrearCompra(repositorioCompra, repositorioPaquete, daoPaquete);
     }
 
     @Bean

@@ -4,24 +4,35 @@ import com.ceiba.compra.modelo.entidad.Compra;
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
+import com.ceiba.paquete.modelo.dto.DtoPaquete;
+import com.ceiba.paquete.modelo.entidad.Paquete;
+import com.ceiba.paquete.puerto.dao.DaoPaquete;
 import com.ceiba.paquete.puerto.repositorio.RepositorioPaquete;
+import static com.ceiba.dominio.ValidadorArgumento.*;
 
 public class ServicioCrearCompra {
 
     private static final String MENSAJE_LA_COMPRA_YA_EXISTE = "La compra ya existe en el sistema";
     private static final String MENSAJE_PAQUETE_NO_EXISTE = "El paquete no existe en el sistema";
+    private static final String MENSAJE_VALIDAR_FECHA_HASTA_PAQUETE = "La fecha limite de compra para el paquete ya paso";
+    private static final String MENSAJE_EXEDE_LIMITE_CUPOS = "La compra exede el limite de cupos";
 
     private final RepositorioCompra repositorioCompra;
     private final RepositorioPaquete repositorioPaquete;
+    private final DaoPaquete daoPaquete;
 
-    public ServicioCrearCompra(RepositorioCompra repositorioCompra, RepositorioPaquete repositorioPaquete) {
+    public ServicioCrearCompra(RepositorioCompra repositorioCompra, RepositorioPaquete repositorioPaquete, DaoPaquete daoPaquete) {
         this.repositorioPaquete = repositorioPaquete;
         this.repositorioCompra = repositorioCompra;
+        this.daoPaquete = daoPaquete;
     }
 
     public Long ejecutar(Compra compra) {
         validarExistenciaPaquete(compra.getIdPaquete());
         validarExistenciaPrevia(compra);
+        DtoPaquete paquete = daoPaquete.obtener(compra.getIdPaquete());
+        validarMenor(compra.getFechaCompra(), paquete.getFechaHasta(), MENSAJE_VALIDAR_FECHA_HASTA_PAQUETE);
+        validarMenor(compra.getNumeroAdultos() + compra.getNumeroMenores(), paquete.getCupos(), String.format(MENSAJE_EXEDE_LIMITE_CUPOS, paquete.getCupos()));
         return this.repositorioCompra.crear(compra);
     }
 
