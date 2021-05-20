@@ -1,10 +1,6 @@
 package com.ceiba.paquete.servicio;
 
 import com.ceiba.BasePrueba;
-import com.ceiba.compra.modelo.entidad.Compra;
-import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
-import com.ceiba.compra.servicio.ServicioActualizarCompra;
-import com.ceiba.compra.servicio.testdatabuilder.CompraTestDataBuilder;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
 import com.ceiba.paquete.modelo.entidad.Paquete;
 import com.ceiba.paquete.puerto.repositorio.RepositorioPaquete;

@@ -90,5 +90,21 @@ public class ServicioCrearCompraTest {
         BasePrueba.assertThrows(() -> servicioCrearCompra.ejecutar(compra), ExcepcionValorInvalido.class,"La compra exede el limite de cupos");
     }
 
+    @Test
+    public void validarCompraRegresoTest() {
+        // arrange
+        Compra compra = new CompraTestDataBuilder().conNumeroAdultos(2L).conNumeroMenores(2L).conFechaIdaSabado().build();
+        DtoPaquete paquete = new PaqueteTestDataBuilder().conFechaIdaSemanaProxima().conCupos(4L).buildDto();
+        RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
+        RepositorioPaquete repositorioPaquete = Mockito.mock(RepositorioPaquete.class);
+        DaoPaquete daoPaquete = Mockito.mock(DaoPaquete.class);
+        Mockito.when(repositorioPaquete.existe(Mockito.anyLong())).thenReturn(true);
+        Mockito.when(repositorioCompra.existe(Mockito.anyLong(), Mockito.anyLong())).thenReturn(false);
+        Mockito.when(daoPaquete.obtener(Mockito.anyLong())).thenReturn(paquete);
+        ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, repositorioPaquete, daoPaquete);
+        // act - assert
+        BasePrueba.assertThrows(() -> servicioCrearCompra.ejecutar(compra), ExcepcionValorInvalido.class,"La fecha de regreso no coincide con los días de duración del paquete");
+    }
+
 
 }
