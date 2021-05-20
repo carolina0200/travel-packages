@@ -55,6 +55,7 @@ public class Compra {
         validarObligatorio(correo, MENSAJE_CORREO_OBLIGATORIO);
         validarRegex(correo, REGEX_CORREO, MENSAJE_CORREO_CORRECTO);
         validarObligatorio(numeroAdultos, MENSAJE_NUMERO_ADULTOS_OBLIGATORIO);
+        validarPositivo(numeroAdultos.doubleValue(), MENSAJE_NUMERO_ADULTOS_POSITIVO);
         validarMenor(MINIMO_ADULTOS, numeroAdultos, MENSAJE_NUMERO_ADULTOS_MAYOR_CERO);
         validarObligatorio(fechaCompra, MENSAJE_FECHA_COMPRA_OBLIGATORIO);
         validarMenor(fechaCompra, fechaIda, MENSAJE_FECHA_COMPRA_VALIDACION);

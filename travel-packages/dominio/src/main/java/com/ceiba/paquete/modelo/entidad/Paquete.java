@@ -38,7 +38,7 @@ public class Paquete {
         validarObligatorio(cupos, MENSAJE_CUPOS_OBLIGATORIO);
         validarObligatorio(dias, MENSAJE_DIAS_OBLIGATORIO);
         validarObligatorio(fechaCreacion, MENSAJE_FECHA_CREACION_OBLIGATORIO);
-        validarObligatorio(fechaHasta, MENSAJE_ESTADO_OBLIGATORIO);
+        validarObligatorio(fechaHasta, MENSAJE_FECHA_HASTA_OBLIGATORIO);
         validarMenor(LocalDateTime.now(), fechaHasta, MENSAJE_FECHA_HASTA_VALIDACION);
 
         this.id = id;

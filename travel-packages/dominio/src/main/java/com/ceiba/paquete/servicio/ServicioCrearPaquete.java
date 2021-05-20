@@ -1,6 +1,5 @@
 package com.ceiba.paquete.servicio;
 
-import com.ceiba.compra.modelo.entidad.Compra;
 import com.ceiba.dominio.excepcion.ExcepcionDuplicidad;
 import com.ceiba.paquete.modelo.entidad.Paquete;
 import com.ceiba.paquete.puerto.repositorio.RepositorioPaquete;
