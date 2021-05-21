@@ -30,7 +30,7 @@ public class ComandoControladorCompraTest {
     private MockMvc mocMvc;
 
     @Test
-    public void crear() throws Exception{
+    public void crear() throws Exception {
         // arrange
         ComandoCompra compra = new ComandoCompraTestDataBuilder().build();
 
@@ -43,7 +43,7 @@ public class ComandoControladorCompraTest {
     }
 
     @Test
-    public void actualizar() throws Exception{
+    public void actualizar() throws Exception {
         // arrange
         Long id = 1L;
         ComandoCompra compra = new ComandoCompraTestDataBuilder().build();
@@ -56,13 +56,12 @@ public class ComandoControladorCompraTest {
     }
 
     @Test
-    public void calcularPrecio() throws Exception{
+    public void calcularPrecio() throws Exception {
         // arrange
-        Long id = 1L;
         ComandoCompra compra = new ComandoCompraTestDataBuilder().build();
 
         // act - assert
-        mocMvc.perform(put("/compras/calcular-precio/{id}",id)
+        mocMvc.perform(post("/compras/calcular-precio")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(compra)))
                 .andExpect(status().isOk())

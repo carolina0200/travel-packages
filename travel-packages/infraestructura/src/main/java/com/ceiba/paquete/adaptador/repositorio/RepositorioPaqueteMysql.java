@@ -21,6 +21,9 @@ public class RepositorioPaqueteMysql implements RepositorioPaquete {
     @SqlStatement(namespace="paquete", value="existe")
     private static String sqlExiste;
 
+    @SqlStatement(namespace="paquete", value="obtenerPrecio")
+    private static String sqlObtenerPrecio;
+
     public RepositorioPaqueteMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -40,6 +43,14 @@ public class RepositorioPaqueteMysql implements RepositorioPaquete {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
 
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste,paramSource, Boolean.class);
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlExiste, paramSource, Boolean.class);
+    }
+
+    @Override
+    public Double obtenerPrecio(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtenerPrecio, paramSource, Double.class);
     }
 }

@@ -17,4 +17,6 @@ public interface RepositorioPaquete {
     void actualizar(Paquete paquete);
 
     boolean existe(Long id);
+
+    Double obtenerPrecio(Long id);
 }

@@ -1,0 +1,1 @@
+select precio from paquete where id = :id

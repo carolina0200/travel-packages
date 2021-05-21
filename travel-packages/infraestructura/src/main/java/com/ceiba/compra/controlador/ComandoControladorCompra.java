@@ -37,10 +37,9 @@ public class ComandoControladorCompra {
         manejadorActualizarCompra.ejecutar(comandoCompra);
     }
 
-    @PutMapping(value="/calcular-precio/{id}")
+    @PostMapping(value="/calcular-precio")
     @ApiOperation("Calcular valor compra")
-    public ComandoRespuesta<Double> calcularPrecio(@RequestBody ComandoCompra comandoCompra, @PathVariable Long id) {
-        comandoCompra.setId(id);
+    public ComandoRespuesta<Double> calcularPrecio(@RequestBody ComandoCompra comandoCompra) {
         return manejadorCalcularPrecioCompra.ejecutar(comandoCompra);
     }
 }

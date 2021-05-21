@@ -2,11 +2,7 @@ package com.ceiba.compra.servicio;
 
 import com.ceiba.compra.modelo.entidad.Compra;
 import com.ceiba.dominio.excepcion.ExcepcionSinDatos;
-import com.ceiba.paquete.modelo.dto.DtoPaquete;
-import com.ceiba.paquete.puerto.dao.DaoPaquete;
 import com.ceiba.paquete.puerto.repositorio.RepositorioPaquete;
-
-import java.time.DayOfWeek;
 
 public class ServicioCalcularPrecioCompra {
 
@@ -17,17 +13,14 @@ public class ServicioCalcularPrecioCompra {
     private static final double PORC_DESCUENTO_CINCO_PERSONAS_O_MAS = 0.2;
 
     private final RepositorioPaquete repositorioPaquete;
-    private final DaoPaquete daoPaquete;
 
-    public ServicioCalcularPrecioCompra(RepositorioPaquete repositorioPaquete, DaoPaquete daoPaquete){
+    public ServicioCalcularPrecioCompra(RepositorioPaquete repositorioPaquete){
         this.repositorioPaquete = repositorioPaquete;
-        this.daoPaquete = daoPaquete;
     }
 
     public Double ejecutar(Compra compra) {
         validarExistenciaPaquete(compra.getIdPaquete());
-        DtoPaquete paquete = obtenerPaquete(compra.getIdPaquete());
-        return calcularValor(compra, paquete);
+        return calcularValor(compra, repositorioPaquete.obtenerPrecio(compra.getIdPaquete()));
     }
 
     private void validarExistenciaPaquete(Long idPaquete) {
@@ -37,20 +30,14 @@ public class ServicioCalcularPrecioCompra {
         }
     }
 
-    private DtoPaquete obtenerPaquete(Long idPaquete) {
-        return daoPaquete.obtener(idPaquete);
-    }
-
-    private Double calcularValor(Compra compra, DtoPaquete paquete) {
-        Long numeroPersonas = compra.getNumeroMenores() + compra.getNumeroAdultos();
-        Double valor = paquete.getPrecio() * numeroPersonas;
-
-        if(compra.getFechaIda().getDayOfWeek() == DayOfWeek.SATURDAY || compra.getFechaIda().getDayOfWeek() == DayOfWeek.SUNDAY) {
+    private Double calcularValor(Compra compra, Double precioPaquete) {
+        Double valor = precioPaquete * (compra.getNumeroMenores() + compra.getNumeroAdultos());
+        if(compra.fechaIdaEsFinDeSemanda()) {
             valor += valor * PORC_RECARGOS_FIN_DE_SEMANA;
-        } else if (compra.getNumeroMenores() > 1) {
-            valor -= (compra.getNumeroMenores() * paquete.getPrecio()) * PORC_DESCUENTO_MENORES;
+        } else if (compra.hayMenores()) {
+            valor -= (compra.getNumeroMenores() * precioPaquete) * PORC_DESCUENTO_MENORES;
         }
-        if(numeroPersonas >= 5) {
+        if(compra.aplicaDescuentoNumeroPersonas()) {
             valor -= valor * PORC_DESCUENTO_CINCO_PERSONAS_O_MAS;
         }
         return valor;

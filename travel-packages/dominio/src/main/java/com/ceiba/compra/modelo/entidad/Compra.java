@@ -2,6 +2,7 @@ package com.ceiba.compra.modelo.entidad;
 
 import lombok.Getter;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import static com.ceiba.dominio.ValidadorArgumento.*;
 
@@ -32,6 +33,9 @@ public class Compra {
     private static final String MENSAJE_FECHA_COMPRA_VALIDACION = "La fecha de compra debe ser antes de la fecha de ida.";
     private static final String MENSAJE_FECHAS_VALIDACION = "La fecha de ida debe ser antes de la fecha de regreso.";
 
+    public static final int NUMERO_MINIMO_PERSONAS_DESCUENTO = 5;
+    public static final int NUMERO_MINIMO_MENORES_DESCUENTO_SEMANA = 1;
+
     private Long id;
     private Long idPaquete;
     private Double valor;
@@ -45,22 +49,6 @@ public class Compra {
     private LocalDateTime fechaRegreso;
 
     public Compra(Long id, Long idPaquete, Double valor, String vigencia, String nombre, String correo, Long numeroMenores, Long numeroAdultos, LocalDateTime fechaCompra, LocalDateTime fechaIda, LocalDateTime fechaRegreso) {
-        this.id = id;
-        this.idPaquete = idPaquete;
-        this.valor = valor;
-        this.vigencia = vigencia;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.numeroMenores = numeroMenores;
-        this.numeroAdultos = numeroAdultos;
-        this.fechaCompra = fechaCompra;
-        this.fechaIda = fechaIda;
-        this.fechaRegreso = fechaRegreso;
-
-        validacionCampos();
-    }
-
-    private void validacionCampos() {
         validarObligatorio(idPaquete, MENSAJE_ID_PAQUETE_OBLIGATORIO);
         validarObligatorio(valor, MENSAJE_VALOR_OBLIGATORIO);
         validarPositivo(valor, MENSAJE_VALOR_POSITIVO);
@@ -77,5 +65,31 @@ public class Compra {
         validarObligatorio(fechaIda, MENSAJE_FECHA_IDA_OBLIGATORIO);
         validarObligatorio(fechaRegreso, MENSAJE_FECHA_REGRESO_OBLIGATORIO);
         validarMenor(fechaIda, fechaRegreso, MENSAJE_FECHAS_VALIDACION);
+
+        this.id = id;
+        this.idPaquete = idPaquete;
+        this.valor = valor;
+        this.vigencia = vigencia;
+        this.nombre = nombre;
+        this.correo = correo;
+        this.numeroMenores = numeroMenores;
+        this.numeroAdultos = numeroAdultos;
+        this.fechaCompra = fechaCompra;
+        this.fechaIda = fechaIda;
+        this.fechaRegreso = fechaRegreso;
+
     }
+
+    public boolean fechaIdaEsFinDeSemanda() {
+        return this.fechaIda.getDayOfWeek() == DayOfWeek.SATURDAY || this.fechaIda.getDayOfWeek() == DayOfWeek.SUNDAY;
+    }
+
+    public boolean hayMenores() {
+        return this.getNumeroMenores() >= NUMERO_MINIMO_MENORES_DESCUENTO_SEMANA;
+    }
+
+    public boolean aplicaDescuentoNumeroPersonas() {
+        return (this.numeroAdultos + this.numeroMenores) >= NUMERO_MINIMO_PERSONAS_DESCUENTO;
+    }
+
 }

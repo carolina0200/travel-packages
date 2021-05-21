@@ -25,8 +25,8 @@ public class BeanServicio {
     }
 
     @Bean
-    public ServicioCalcularPrecioCompra servicioCalcularPrecioCompra(RepositorioPaquete repositorioPaquete, DaoPaquete daoPaquete) {
-        return new ServicioCalcularPrecioCompra(repositorioPaquete, daoPaquete);
+    public ServicioCalcularPrecioCompra servicioCalcularPrecioCompra(RepositorioPaquete repositorioPaquete) {
+        return new ServicioCalcularPrecioCompra(repositorioPaquete);
     }
 
     @Bean
