@@ -3,6 +3,7 @@ package com.ceiba.compra.servicio.testdatabuilder;
 import com.ceiba.compra.comando.ComandoCompra;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 
 public class ComandoCompraTestDataBuilder {
     private Long id;
@@ -31,8 +32,17 @@ public class ComandoCompraTestDataBuilder {
         this.fechaRegreso = this.fechaIda.plusDays(3);
     }
 
+    public ComandoCompraTestDataBuilder conFechaIdaSemana() {
+        this.fechaCompra = LocalDateTime.of(2021, Month.MAY, 19, 15, 00);
+        this.fechaIda = LocalDateTime.of(2021, Month.MAY, 20, 15, 00);
+        this.fechaRegreso = LocalDateTime.of(2021, Month.MAY, 23, 15, 00);
+        return this;
+    }
+
     public ComandoCompra build() {
         return new ComandoCompra(id, idPaquete, valor, vigencia, nombre,
         correo, numeroMenores, numeroAdultos, fechaCompra, fechaIda, fechaRegreso);
     }
+
+
 }

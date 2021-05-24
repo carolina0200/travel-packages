@@ -58,7 +58,7 @@ public class ComandoControladorCompraTest {
     @Test
     public void calcularPrecio() throws Exception {
         // arrange
-        ComandoCompra compra = new ComandoCompraTestDataBuilder().build();
+        ComandoCompra compra = new ComandoCompraTestDataBuilder().conFechaIdaSemana().build();
 
         // act - assert
         mocMvc.perform(post("/compras/calcular-precio")
