@@ -24,6 +24,12 @@ public class RepositorioPaqueteMysql implements RepositorioPaquete {
     @SqlStatement(namespace="paquete", value="obtenerPrecio")
     private static String sqlObtenerPrecio;
 
+    @SqlStatement(namespace="paquete", value="sumarCupos")
+    private static String sqlSumarCupos;
+
+    @SqlStatement(namespace="paquete", value="restarCupos")
+    private static String sqlRestarCupos;
+
     public RepositorioPaqueteMysql(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
     }
@@ -52,5 +58,23 @@ public class RepositorioPaqueteMysql implements RepositorioPaquete {
         paramSource.addValue("id", id);
 
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtenerPrecio, paramSource, Double.class);
+    }
+
+    @Override
+    public void sumarCupos(Long id, Long cupos) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        paramSource.addValue("cupos", cupos);
+
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlSumarCupos, paramSource);
+    }
+
+    @Override
+    public void restarCupos(Long id, Long cupos) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        paramSource.addValue("cupos", cupos);
+
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlRestarCupos, paramSource);
     }
 }

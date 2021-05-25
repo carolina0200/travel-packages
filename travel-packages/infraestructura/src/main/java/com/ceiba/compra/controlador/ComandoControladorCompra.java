@@ -5,6 +5,7 @@ import com.ceiba.compra.comando.ComandoCompra;
 import com.ceiba.compra.comando.manejador.ManejadorActualizarCompra;
 import com.ceiba.compra.comando.manejador.ManejadorCalcularPrecioCompra;
 import com.ceiba.compra.comando.manejador.ManejadorCrearCompra;
+import com.ceiba.compra.comando.manejador.ManejadorEliminarCompra;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +18,26 @@ public class ComandoControladorCompra {
     private final ManejadorActualizarCompra manejadorActualizarCompra;
     private final ManejadorCrearCompra manejadorCrearCompra;
     private final ManejadorCalcularPrecioCompra manejadorCalcularPrecioCompra;
+    private final ManejadorEliminarCompra manejadorEliminarCompra;
 
-    public ComandoControladorCompra(ManejadorActualizarCompra manejadorActualizarCompra, ManejadorCrearCompra manejadorCrearCompra, ManejadorCalcularPrecioCompra manejadorCalcularPrecioCompra) {
+    public ComandoControladorCompra(ManejadorActualizarCompra manejadorActualizarCompra, ManejadorCrearCompra manejadorCrearCompra, ManejadorCalcularPrecioCompra manejadorCalcularPrecioCompra, ManejadorEliminarCompra manejadorEliminarCompra) {
         this.manejadorActualizarCompra = manejadorActualizarCompra;
         this.manejadorCrearCompra = manejadorCrearCompra;
         this.manejadorCalcularPrecioCompra = manejadorCalcularPrecioCompra;
+        this.manejadorEliminarCompra = manejadorEliminarCompra;
     }
 
     @PostMapping
     @ApiOperation("Crear compra")
     public ComandoRespuesta<Long> crear(@RequestBody ComandoCompra comandoCompra) {
         return manejadorCrearCompra.ejecutar(comandoCompra);
+    }
+
+    @DeleteMapping(value="/{id}")
+    @ApiOperation("Eliminar compra")
+    public void eliminar(@RequestBody ComandoCompra comandoCompra, @PathVariable Long id) {
+        comandoCompra.setId(id);
+        manejadorEliminarCompra.ejecutar(comandoCompra);
     }
 
     @PutMapping(value="/{id}")

@@ -4,6 +4,7 @@ import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.compra.servicio.ServicioActualizarCompra;
 import com.ceiba.compra.servicio.ServicioCalcularPrecioCompra;
 import com.ceiba.compra.servicio.ServicioCrearCompra;
+import com.ceiba.compra.servicio.ServicioEliminarCompra;
 import com.ceiba.paquete.puerto.dao.DaoPaquete;
 import com.ceiba.paquete.puerto.repositorio.RepositorioPaquete;
 import com.ceiba.paquete.servicio.ServicioActualizarPaquete;
@@ -27,6 +28,11 @@ public class BeanServicio {
     @Bean
     public ServicioCalcularPrecioCompra servicioCalcularPrecioCompra(RepositorioPaquete repositorioPaquete) {
         return new ServicioCalcularPrecioCompra(repositorioPaquete);
+    }
+
+    @Bean
+    public ServicioEliminarCompra servicioEliminarCompra(RepositorioCompra repositorioCompra, RepositorioPaquete repositorioPaquete) {
+        return new ServicioEliminarCompra(repositorioCompra, repositorioPaquete);
     }
 
     @Bean

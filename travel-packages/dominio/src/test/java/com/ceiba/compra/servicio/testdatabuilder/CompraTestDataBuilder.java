@@ -9,7 +9,6 @@ public class CompraTestDataBuilder {
     private Long id;
     private Long idPaquete;
     private Double valor;
-    private String vigencia;
     private String nombre;
     private String correo;
     private Long numeroMenores;
@@ -22,7 +21,6 @@ public class CompraTestDataBuilder {
     public CompraTestDataBuilder() {
         this.idPaquete = 1L;
         this.valor = 1000000D;
-        this.vigencia = "A";
         this.nombre = "Carolina Giraldo";
         this.correo = "test@gmail.com";
         this.numeroMenores = 3L;
@@ -34,11 +32,6 @@ public class CompraTestDataBuilder {
 
     public CompraTestDataBuilder conCorreo(String correo) {
         this.correo = correo;
-        return this;
-    }
-
-    public CompraTestDataBuilder conVigencia(String vigencia) {
-        this.vigencia = vigencia;
         return this;
     }
 
@@ -67,7 +60,7 @@ public class CompraTestDataBuilder {
     }
 
     public Compra build() {
-        return new Compra(id, idPaquete, valor, vigencia, nombre,
+        return new Compra(id, idPaquete, valor, nombre,
                 correo, numeroMenores, numeroAdultos, fechaCompra, fechaIda, fechaRegreso);
     }
 }

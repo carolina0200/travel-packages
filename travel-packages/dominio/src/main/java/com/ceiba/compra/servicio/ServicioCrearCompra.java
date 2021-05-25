@@ -34,7 +34,9 @@ public class ServicioCrearCompra {
         validarMenor(compra.getFechaCompra(), paquete.getFechaHasta(), MENSAJE_VALIDAR_FECHA_HASTA_PAQUETE);
         validarMenor(compra.getNumeroAdultos() + compra.getNumeroMenores(), paquete.getCupos(), String.format(MENSAJE_EXEDE_LIMITE_CUPOS, paquete.getCupos()));
         validarIgual((double) compra.getFechaIda().plusDays(paquete.getDias()).getDayOfMonth(), (double) compra.getFechaRegreso().getDayOfMonth(), MENSAJE_NO_CONINCIDEN_DIAS_CON_FECHAS);
-        return this.repositorioCompra.crear(compra);
+        Long id = this.repositorioCompra.crear(compra);
+        this.repositorioPaquete.restarCupos(compra.getIdPaquete(), compra.getNumeroAdultos() + compra.getNumeroMenores());
+        return id;
     }
 
     private void validarExistenciaPrevia(Compra compra) {

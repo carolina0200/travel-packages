@@ -24,14 +24,6 @@ public class ServicioCrearCompraTest {
     }
 
     @Test
-    public void validarVigenciaTest() {
-        // arrange
-        CompraTestDataBuilder compraTestDataBuilder = new CompraTestDataBuilder().conVigencia("F");
-        // act - assert
-        BasePrueba.assertThrows(() -> compraTestDataBuilder.build(), ExcepcionValorInvalido.class, "En vigencia va A para Activa e I para Inactiva");
-    }
-
-    @Test
     public void validarExistenciaPaqueteTest() {
         // arrange
         Compra compra = new CompraTestDataBuilder().build();

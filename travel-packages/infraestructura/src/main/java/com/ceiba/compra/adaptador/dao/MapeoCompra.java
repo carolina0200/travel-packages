@@ -14,7 +14,6 @@ public class MapeoCompra implements RowMapper<DtoCompra>, MapperResult {
                 resultSet.getLong("id"),
                 resultSet.getLong("id_paquete"),
                 resultSet.getDouble("valor"),
-                resultSet.getString("vigencia"),
                 resultSet.getString("nombre"),
                 resultSet.getString("correo"),
                 resultSet.getLong("numero_menores"),

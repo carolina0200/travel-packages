@@ -9,7 +9,6 @@ public class ComandoCompraTestDataBuilder {
     private Long id;
     private Long idPaquete;
     private Double valor;
-    private String vigencia;
     private String nombre;
     private String correo;
     private Long numeroMenores;
@@ -22,7 +21,6 @@ public class ComandoCompraTestDataBuilder {
     public ComandoCompraTestDataBuilder() {
         this.idPaquete = 1L;
         this.valor = 1000000D;
-        this.vigencia = "A";
         this.nombre = "Carolina Giraldo";
         this.correo = "caro@gmail.com";
         this.numeroMenores = 3L;
@@ -40,7 +38,7 @@ public class ComandoCompraTestDataBuilder {
     }
 
     public ComandoCompra build() {
-        return new ComandoCompra(id, idPaquete, valor, vigencia, nombre,
+        return new ComandoCompra(id, idPaquete, valor, nombre,
         correo, numeroMenores, numeroAdultos, fechaCompra, fechaIda, fechaRegreso);
     }
 

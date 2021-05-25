@@ -16,5 +16,16 @@ public interface RepositorioCompra {
      */
     void actualizar(Compra compra);
 
+    /**
+     * Permite eliminar una compra
+     * @param id
+     */
+    void eliminar(Long id);
+
+    /**
+     * Permite verificar si existe una compra
+     * @param id
+     * @param idPaquete
+     */
     boolean existe(Long id, Long idPaquete);
 }

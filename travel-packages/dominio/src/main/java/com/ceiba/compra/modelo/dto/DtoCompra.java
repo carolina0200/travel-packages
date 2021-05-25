@@ -11,7 +11,6 @@ public class DtoCompra {
     private Long id;
     private Long idPaquete;
     private Double valor;
-    private String vigencia;
     private String nombre;
     private String correo;
     private Long numeroMenores;
