@@ -26,7 +26,7 @@ public class ConsultaControladorCompraTest {
     private MockMvc mocMvc;
 
     @Test
-   // @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+    @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
     public void listar() throws Exception {
         // arrange
 
