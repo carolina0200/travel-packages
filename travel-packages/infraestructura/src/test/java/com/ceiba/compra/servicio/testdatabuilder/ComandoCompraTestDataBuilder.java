@@ -22,7 +22,7 @@ public class ComandoCompraTestDataBuilder {
         this.idPaquete = 1L;
         this.valor = 1000000D;
         this.nombre = "Carolina Giraldo";
-        this.correo = "caro@gmail.com";
+        this.correo = "test@gmail.com";
         this.numeroMenores = 3L;
         this.numeroAdultos = 1L;
         this.fechaCompra = LocalDateTime.now();

@@ -39,6 +39,7 @@ public class ComandoControladorCompraTest {
                 .content(objectMapper.writeValueAsString(compra)))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'valor': 2}"));
+
     }
 
     @Test
@@ -73,7 +74,6 @@ public class ComandoControladorCompraTest {
         Long id = 2L;
         ComandoCompra compra = new ComandoCompraTestDataBuilder().build();
 
-        // act - assert
         mocMvc.perform(delete("/compras/{id}",id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(compra))
