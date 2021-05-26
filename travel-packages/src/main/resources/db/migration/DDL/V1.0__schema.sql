@@ -4,7 +4,6 @@ create table compra (
  valor double not null,
  numero_menores int(5),
  numero_adultos int(5),
- vigencia varchar(1),
  nombre varchar(100),
  correo varchar(100),
  fecha_compra datetime not null,
@@ -23,6 +22,5 @@ create table paquete (
  cupos int(10) not null,
  dias int(10) not null,
  fecha_creacion datetime not null,
- fecha_hasta datetime not null,
  primary key (id)
 );

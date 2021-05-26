@@ -48,14 +48,14 @@ public class CompraTestDataBuilder {
     public CompraTestDataBuilder conFechaIdaSabado() {
         this.fechaCompra = LocalDateTime.of(2021, Month.MAY, 20, 15, 00);
         this.fechaIda = LocalDateTime.of(2021, Month.MAY, 22, 15, 00);
-        this.fechaRegreso = LocalDateTime.of(2021, Month.MAY, 25, 15, 00);
+        this.fechaRegreso = LocalDateTime.of(2021, Month.MAY, 24, 15, 00);
         return this;
     }
 
     public CompraTestDataBuilder conFechaIdaSemana() {
         this.fechaCompra = LocalDateTime.of(2021, Month.MAY, 19, 15, 00);
         this.fechaIda = LocalDateTime.of(2021, Month.MAY, 20, 15, 00);
-        this.fechaRegreso = LocalDateTime.of(2021, Month.MAY, 23, 15, 00);
+        this.fechaRegreso = LocalDateTime.of(2021, Month.MAY, 22, 15, 00);
         return this;
     }
 

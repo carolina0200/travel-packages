@@ -8,6 +8,7 @@ import com.ceiba.compra.comando.manejador.ManejadorCrearCompra;
 import com.ceiba.compra.comando.manejador.ManejadorEliminarCompra;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,7 +29,7 @@ public class ComandoControladorCompra {
     }
 
     @PostMapping
-    @ApiOperation("Crear compra")
+    @ApiOperation(value= "Crear compra", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ComandoRespuesta<Long> crear(@RequestBody ComandoCompra comandoCompra) {
         return manejadorCrearCompra.ejecutar(comandoCompra);
     }

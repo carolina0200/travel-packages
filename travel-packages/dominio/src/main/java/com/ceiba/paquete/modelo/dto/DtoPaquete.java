@@ -17,5 +17,4 @@ public class DtoPaquete {
     private Long cupos;
     private Long dias;
     private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaHasta;
 }

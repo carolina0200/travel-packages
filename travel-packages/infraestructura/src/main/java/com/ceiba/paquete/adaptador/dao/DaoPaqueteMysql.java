@@ -33,6 +33,6 @@ public class DaoPaqueteMysql implements DaoPaquete {
     public DtoPaquete obtener(Long id) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id", id);
-        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlListar, paramSource, new MapeoPaquete());
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().queryForObject(sqlObtener, paramSource, new MapeoPaquete());
     }
 }

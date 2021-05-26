@@ -19,8 +19,7 @@ public class MapeoPaquete implements RowMapper<DtoPaquete>, MapperResult {
                 resultSet.getString("descripcion"),
                 resultSet.getLong("cupos"),
                 resultSet.getLong("dias"),
-                extraerLocalDateTime(resultSet, "fecha_creacion"),
-                extraerLocalDateTime(resultSet, "fecha_hasta")
+                extraerLocalDateTime(resultSet, "fecha_creacion")
         );
     }
 }

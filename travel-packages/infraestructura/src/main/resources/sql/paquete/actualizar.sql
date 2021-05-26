@@ -4,6 +4,5 @@ set estado = :estado,
 	hotel = :hotel,
 	cupos = :cupos,
 	dias = :dias,
-	descripcion = :descripcion,
-	fecha_hasta = :fechaHasta
+	descripcion = :descripcion
 where id = :id

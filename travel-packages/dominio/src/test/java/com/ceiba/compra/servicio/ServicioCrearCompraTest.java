@@ -51,10 +51,10 @@ public class ServicioCrearCompraTest {
     }
 
     @Test
-    public void validarCompraFechaHastaPaqueteTest() {
+    public void validarCompraEstadoPaqueteTest() {
         // arrange
         Compra compra = new CompraTestDataBuilder().conFechaIdaSabado().build();
-        DtoPaquete paquete = new PaqueteTestDataBuilder().conFechaIdaSemana().buildDto();
+        DtoPaquete paquete = new PaqueteTestDataBuilder().conEstadoInactivo().buildDto();
         RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
         RepositorioPaquete repositorioPaquete = Mockito.mock(RepositorioPaquete.class);
         DaoPaquete daoPaquete = Mockito.mock(DaoPaquete.class);
@@ -63,14 +63,14 @@ public class ServicioCrearCompraTest {
         Mockito.when(daoPaquete.obtener(Mockito.anyLong())).thenReturn(paquete);
         ServicioCrearCompra servicioCrearCompra = new ServicioCrearCompra(repositorioCompra, repositorioPaquete, daoPaquete);
         // act - assert
-        BasePrueba.assertThrows(() -> servicioCrearCompra.ejecutar(compra), ExcepcionValorInvalido.class,"La fecha limite de compra para el paquete ya paso");
+        BasePrueba.assertThrows(() -> servicioCrearCompra.ejecutar(compra), ExcepcionValorInvalido.class,"El paquete esta inactivo por ahora");
     }
 
     @Test
     public void validarCompraCuposPaqueteTest() {
         // arrange
         Compra compra = new CompraTestDataBuilder().conNumeroAdultos(5L).conNumeroMenores(2L).conFechaIdaSabado().build();
-        DtoPaquete paquete = new PaqueteTestDataBuilder().conFechaIdaSemanaProxima().conCupos(4L).buildDto();
+        DtoPaquete paquete = new PaqueteTestDataBuilder().conCupos(4L).buildDto();
         RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
         RepositorioPaquete repositorioPaquete = Mockito.mock(RepositorioPaquete.class);
         DaoPaquete daoPaquete = Mockito.mock(DaoPaquete.class);
@@ -86,7 +86,7 @@ public class ServicioCrearCompraTest {
     public void validarCompraRegresoTest() {
         // arrange
         Compra compra = new CompraTestDataBuilder().conNumeroAdultos(2L).conNumeroMenores(2L).conFechaIdaSabado().build();
-        DtoPaquete paquete = new PaqueteTestDataBuilder().conFechaIdaSemanaProxima().conCupos(4L).buildDto();
+        DtoPaquete paquete = new PaqueteTestDataBuilder().conCupos(4L).buildDto();
         RepositorioCompra repositorioCompra = Mockito.mock(RepositorioCompra.class);
         RepositorioPaquete repositorioPaquete = Mockito.mock(RepositorioPaquete.class);
         DaoPaquete daoPaquete = Mockito.mock(DaoPaquete.class);

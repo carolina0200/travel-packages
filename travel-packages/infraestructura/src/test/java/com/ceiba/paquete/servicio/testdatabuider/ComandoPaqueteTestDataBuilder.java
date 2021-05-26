@@ -15,7 +15,6 @@ public class ComandoPaqueteTestDataBuilder {
     private Long cupos;
     private Long dias;
     private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaHasta;
 
     public ComandoPaqueteTestDataBuilder() {
         this.precio = 1000000D;
@@ -26,10 +25,9 @@ public class ComandoPaqueteTestDataBuilder {
         this.cupos = 50L;
         this.dias = 4L;
         this.fechaCreacion = LocalDateTime.now();
-        this.fechaHasta = this.fechaCreacion.plusDays(30);
     }
 
     public ComandoPaquete build() {
-        return new ComandoPaquete(id, precio, estado, ciudad, hotel, descripcion, cupos, dias, fechaCreacion, fechaHasta);
+        return new ComandoPaquete(id, precio, estado, ciudad, hotel, descripcion, cupos, dias, fechaCreacion);
     }
 }

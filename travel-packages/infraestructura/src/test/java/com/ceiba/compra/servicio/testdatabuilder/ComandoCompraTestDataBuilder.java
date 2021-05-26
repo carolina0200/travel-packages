@@ -27,7 +27,7 @@ public class ComandoCompraTestDataBuilder {
         this.numeroAdultos = 1L;
         this.fechaCompra = LocalDateTime.now();
         this.fechaIda = LocalDateTime.now().plusDays(6);
-        this.fechaRegreso = this.fechaIda.plusDays(3);
+        this.fechaRegreso = this.fechaIda.plusDays(2);
     }
 
     public ComandoCompraTestDataBuilder conFechaIdaSemana() {

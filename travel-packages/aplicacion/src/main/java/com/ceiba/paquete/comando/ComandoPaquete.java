@@ -21,5 +21,4 @@ public class ComandoPaquete {
     private Long cupos;
     private Long dias;
     private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaHasta;
 }

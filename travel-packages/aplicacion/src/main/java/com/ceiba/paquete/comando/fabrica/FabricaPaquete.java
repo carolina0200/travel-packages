@@ -17,8 +17,7 @@ public class FabricaPaquete {
                 comandoPaquete.getDescripcion(),
                 comandoPaquete.getCupos(),
                 comandoPaquete.getDias(),
-                comandoPaquete.getFechaCreacion(),
-                comandoPaquete.getFechaHasta()
+                comandoPaquete.getFechaCreacion()
         );
     }
 }
