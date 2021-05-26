@@ -29,7 +29,7 @@ public class ComandoControladorCompra {
     }
 
     @PostMapping
-    @ApiOperation(value= "Crear compra", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value= "Crear compra")
     public ComandoRespuesta<Long> crear(@RequestBody ComandoCompra comandoCompra) {
         return manejadorCrearCompra.ejecutar(comandoCompra);
     }
