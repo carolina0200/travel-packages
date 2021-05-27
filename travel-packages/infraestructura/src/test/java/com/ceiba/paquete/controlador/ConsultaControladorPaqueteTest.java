@@ -20,13 +20,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes= ApplicationMock.class)
 @WebMvcTest(ConsultaControladorPaquete.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ConsultaControladorPaqueteTest {
 
     @Autowired
     private MockMvc mocMvc;
 
     @Test
-   // @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
     public void listar() throws Exception {
         // arrange
 
@@ -34,7 +34,7 @@ public class ConsultaControladorPaqueteTest {
         mocMvc.perform(get("/paquetes")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-              //  .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].ciudad", is("Cartagena")));
     }
 }
